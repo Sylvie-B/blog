@@ -4,10 +4,29 @@
     box-sizing: border-box;
 }
 
-html {
-    font-size: 62.5%;
-}
-
 body {
     width: 100%;
+}
+
+header {
+    text-align: center;
+}
+
+#signIn div {
+    margin: 1vw;
+}
+
+#modal {
+    height: 70%;
+    display: flex;
+    align-items: center;
+}
+
+#frame {
+    border: 1px black solid;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
 }
