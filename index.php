@@ -17,7 +17,6 @@ require "./View/connexion.php";
     <title>Mon Blog</title>
 </head>
 
-<!-- script js ? -->
 <script src="assets/app.js"></script>
 </body>
 </html>

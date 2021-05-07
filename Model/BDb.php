@@ -13,7 +13,7 @@ class BDb
      */
     public function __construct() {
         $this->server ='localhost';
-        $this->db = 'mini_chat';
+        $this->db = 'blog';
         $this->user = 'root';
         $this->password = '';
     }
