@@ -1,7 +1,5 @@
 <div id="article">
     <?php
-//    display last article
+        // display last four articles
     ?>
 </div>
-
-
