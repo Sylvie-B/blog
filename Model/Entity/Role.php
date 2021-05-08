@@ -3,11 +3,12 @@
 
 class Role {
     private ?int $id_rol;
-    private string $comment;
+    private string $roleName
+;
 
-    public function __construct(int $id_rol, string $comment){
+    public function __construct(int $id_rol, string $roleName){
         $this->id_rol = $id_rol;
-        $this->comment = $comment;
+        $this->roleName = $roleName;
     }
 
     /**

@@ -8,7 +8,7 @@ class artMana {
         $this->pdo = $pdo;
     }
 
-    // create
+    // Create
     public function addArticle (string $art_text, int $author_fk): bool {
         $search = $this->pdo->prepare("
             INSERT INTO article (art_text, author_fk) VALUE (:art_text, :author_fk)
@@ -18,8 +18,8 @@ class artMana {
         $search->execute();
         return $this->pdo->lastInsertId() !== 0;
     }
-
-    // read all articles
+    // Read
+    // all articles
     public function getBlogArticles(): array {
         $blogArt = [];
         $search = $this->pdo->prepare("SELECT * FROM article");
@@ -34,7 +34,7 @@ class artMana {
         return $blogArt;
     }
 
-    // read one article
+    // one article
     public function getArticle($id){
         $article = [];
         $search = $this->pdo->prepare("SELECT * FROM article WHERE id_art === $id");
@@ -47,7 +47,7 @@ class artMana {
         return $article;
     }
 
-    // function updateArt
-    // function deleteArt
+    // UpdateArt
+    // DeleteArt
 
 }
