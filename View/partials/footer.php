@@ -7,3 +7,6 @@
         <!-- or max 3 next articles titles -->
     </div>
 </footer>
+<script src="assets/app.js"></script>
+</body>
+</html>
