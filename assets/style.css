@@ -33,7 +33,7 @@ header {
     text-align: center;
 }
 
-header, footer {
+header, footer, #article {
     min-height: 5vh;
     border: 1px black dashed;
 }

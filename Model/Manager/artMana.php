@@ -10,9 +10,7 @@ class artMana {
 
     // Create
     public function addArticle (string $art_text, int $author_fk): bool {
-        $search = $this->pdo->prepare("
-            INSERT INTO article (art_text, author_fk) VALUE (:art_text, :author_fk)
-        ");
+        $search = $this->pdo->prepare("INSERT INTO article (art_text, author_fk) VALUE (:art_text, :author_fk)");
         $search->bindValue(':art_text', strip_tags($art_text));
         $search->bindValue(':author_fk', $author_fk,PDO::PARAM_INT);
         $search->execute();
@@ -36,8 +34,8 @@ class artMana {
 
     // one article
     public function getArticle($id){
-        $article = [];
-        $search = $this->pdo->prepare("SELECT * FROM article WHERE id_art === $id");
+        $article ='';
+        $search = $this->pdo->prepare("SELECT * FROM article WHERE id_art = $id");
         $state = $search->execute();
 
         if($state){
@@ -48,6 +46,22 @@ class artMana {
     }
 
     // UpdateArt
-    // DeleteArt
+    public function updateArt($id, $new_text){
+        $search = $this->pdo->prepare("UPDATE article SET art_text = :new_text WHERE id_art = :id");
 
+        $search->bindParam(':new_text', $new_text);
+        $search->bindParam(':id', $id);
+        if($search->execute()){
+            echo "L'article a été mis à jour";
+        }
+
+    }
+
+    // DeleteArt
+    public function supprArt ($id){
+        $search = $this->pdo->prepare("DELETE FROM article WHERE id_art = $id");
+        if($search->execute()) {
+            echo "L'article a été supprimé";
+        }
+    }
 }
