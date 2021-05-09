@@ -17,35 +17,74 @@ class comtMana {
         $search->bindValue('user_fk', $user_fk);
         $search->bindValue('art_fk', $art_fk);
         $search->execute();
-        return $this->pdo->lastInsertId() !== 0;
+        return $this->pdo->lastInsertId();
     }
 
     // Read
-    // all comments
-    public function getBlogComts(): array {
-        $blogComts = [];
-        $search = $this->pdo->prepare("SELECT * FROM comment");
+    // all comments or one article's comments or one user's comments
+    public function getComts($art = 0, $user = 0): array{
+        $Comts = [];
+        $search = "";
+        // which param is there ?
+        $param = 0;
+        if ($art) {
+            $param++;
+        }
+        if ($user) {
+            $param = $param + 2;
+        }
+        switch ($param) {
+            case 0:
+                $search = $this->pdo->prepare("SELECT * FROM comment");
+                break;
+            case 1:
+                $search = $this->pdo->prepare("SELECT * FROM comment WHERE art_fk = $art");
+                break;
+            case 3:
+                $search = $this->pdo->prepare("SELECT * FROM comment WHERE user_fk = $user");
+                break;
+        }
+
         $state = $search->execute();
 
         if($state){
             $line = $search->fetchAll();
             foreach ($line as $data) {
-                $blogArt[] = new Article($data['id_art'], $data['art_text'], $data['author_fk']);
+                $Comts[] = new Comment($data['id_com'], $data['com_text'], $data['user_fk'], $data['art_fk']);
             }
         }
-        return $blogComts;
+        return $Comts;
     }
 
     // one comment
     public function getOneComt($id){
-        $comment = [];
-        $search = $this->pdo->prepare("SELECT * FROM comment WHERE ");
+        $comment = '';
+        $search = $this->pdo->prepare("SELECT * FROM comment WHERE id_com = $id");
         $state = $search->execute();
 
         if($state){
-            $article = $search->fetch();
-            $article = new Article($article['id_art'], $article['art_text'], $article['author_fk']);
+            $comment = $search->fetch();
+            $comment = new Comment($comment['id_com'], $comment['com_text'], $comment['user_fk'], $comment['art_fk']);
         }
         return $comment;
+    }
+
+    // update
+    public function updateComt ($id, $new_text){
+        $search = $this->pdo->prepare("UPDATE comment SET com_text = :new_text WHERE id_com = :id");
+
+        $search->bindParam('id', $id);
+        $search->bindParam('new_text', $new_text);
+        if($search->execute()){
+            echo "Le commentaire a été mis à jour";
+        }
+    }
+
+    // deleteComt
+    public function supprComt ($id){
+        $search = $this->pdo->prepare("DELETE FROM comment WHERE id_com = $id");
+        if($search->execute()){
+            echo "Le commentaire a été supprimé";
+        }
     }
 }

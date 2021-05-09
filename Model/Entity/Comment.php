@@ -7,7 +7,7 @@ class comment {
     private int $user_fk;
     private int $art_fk;
 
-    public function __construct(int $id_com, string $com_text, int $user_fk, int $art_fk){
+    public function __construct(int $id_com = null, string $com_text, int $user_fk, int $art_fk){
         $this->id_com = $id_com;
         $this->com_text = $com_text;
         $this->user_fk = $user_fk;

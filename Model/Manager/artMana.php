@@ -14,7 +14,7 @@ class artMana {
         $search->bindValue(':art_text', strip_tags($art_text));
         $search->bindValue(':author_fk', $author_fk,PDO::PARAM_INT);
         $search->execute();
-        return $this->pdo->lastInsertId() !== 0;
+        return $this->pdo->lastInsertId();
     }
     // Read
     // all articles
@@ -54,7 +54,6 @@ class artMana {
         if($search->execute()){
             echo "L'article a été mis à jour";
         }
-
     }
 
     // DeleteArt
