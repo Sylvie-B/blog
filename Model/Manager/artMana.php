@@ -9,6 +9,12 @@ class artMana {
     }
 
     // Create if admin
+    /**
+     * @param string $title
+     * @param string $art_text
+     * @param int $author_fk
+     * @return bool
+     */
     public function addArticle (string $title, string $art_text, int $author_fk): bool {
         $search = $this->pdo->prepare("INSERT INTO article (title, art_text, author_fk) VALUE (:title, :art_text, :author_fk)");
         $search->bindValue(':title', strip_tags($title));
@@ -20,6 +26,9 @@ class artMana {
 
     // Read
     // all articles
+    /**
+     * @return array
+     */
     public function getBlogArticles(): array {
         $blogArt = [];
         $search = $this->pdo->prepare("SELECT * FROM article");
@@ -35,6 +44,10 @@ class artMana {
     }
 
     // one article
+    /**
+     * @param $id
+     * @return Article|string
+     */
     public function getArticle($id){
         $article ='';
         $search = $this->pdo->prepare("SELECT * FROM article WHERE id_art = $id");
@@ -48,6 +61,10 @@ class artMana {
     }
 
     // UpdateArt if admin
+    /**
+     * @param $id
+     * @param $new_text
+     */
     public function updateArt($id, $new_text){
         $search = $this->pdo->prepare("UPDATE article SET art_text = :new_text WHERE id_art = :id");
 
@@ -59,6 +76,9 @@ class artMana {
     }
 
     // DeleteArt if admin
+    /**
+     * @param $id
+     */
     public function supprArt ($id){
         $search = $this->pdo->prepare("DELETE FROM article WHERE id_art = $id");
         if($search->execute()) {

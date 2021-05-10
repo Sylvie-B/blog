@@ -1,5 +1,4 @@
 <?php
-
 // include element
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Model/BDb.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Model/Entity/Article.php';
@@ -13,3 +12,11 @@ $mana = new artMana($db);
 
 // display
 $view = new controller();
+
+$ref = [
+    'title' => 'art-1',
+    'text' => 'ceci est mon texte',
+    'author' => 'Heliosens'
+];
+
+$view->displayView('articleView', 'Mon blog', [$ref]);
