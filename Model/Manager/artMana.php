@@ -9,14 +9,17 @@ class artMana {
     }
 
     // Create if admin
+
     /**
      * @param string $title
      * @param string $art_text
      * @param int $author_fk
-     * @return bool
+     * @return string
      */
-    public function addArticle (string $title, string $art_text, int $author_fk): bool {
-        $search = $this->pdo->prepare("INSERT INTO article (title, art_text, author_fk) VALUE (:title, :art_text, :author_fk)");
+    public function addArticle (string $title, string $art_text, int $author_fk) {
+        $search = $this->pdo->prepare("
+            INSERT INTO article (title, art_text, author_fk)
+            VALUE (:title, :art_text, :author_fk)");
         $search->bindValue(':title', strip_tags($title));
         $search->bindValue(':art_text', strip_tags($art_text));
         $search->bindValue(':author_fk', $author_fk,PDO::PARAM_INT);
@@ -60,14 +63,10 @@ class artMana {
      * @return Article
      */
     public function getArticle($id) : Article {
-        $article ='';
         $search = $this->pdo->prepare("SELECT * FROM article WHERE id_art = $id");
-        $state = $search->execute();
-
-        if($state){
-            $article = $search->fetch();
-            $article = new Article($article['id_art'], $article['title'], $article['art_text'], $article['author_fk']);
-        }
+        $search->execute();
+        $article = $search->fetch();
+        $article = new Article($article['id_art'], $article['title'], $article['art_text'], $article['author_fk']);
         return $article;
     }
 
