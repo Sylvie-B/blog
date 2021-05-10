@@ -3,11 +3,13 @@
 
 class Article{
     private ?int $id_art;
+    private string $title;
     private string $art_text;
     private int $author_fk;
 
-    public function __construct(int $id_art = null, string $art_text, int $author_fk){
+    public function __construct(int $id_art = null, string $title, string $art_text, int $author_fk){
         $this->id_art = $id_art;
+        $this->title = $title;
         $this->art_text = $art_text;
         $this->author_fk = $author_fk;
     }
@@ -26,6 +28,22 @@ class Article{
     public function setIdArt(?int $id_art): void
     {
         $this->id_art = $id_art;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     */
+    public function setTitle(string $title): void
+    {
+        $this->title = $title;
     }
 
     /**
@@ -59,4 +77,6 @@ class Article{
     {
         $this->author_fk = $author_fk;
     }
+
+
 }

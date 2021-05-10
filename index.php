@@ -13,5 +13,3 @@ $mana = new artMana($db);
 
 // display
 $view = new controller();
-
-$view->displayView("articleView", "Mon blog");

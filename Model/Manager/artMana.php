@@ -16,6 +16,7 @@ class artMana {
         $search->execute();
         return $this->pdo->lastInsertId();
     }
+
     // Read
     // all articles
     public function getBlogArticles(): array {

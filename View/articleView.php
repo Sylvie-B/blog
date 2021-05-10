@@ -1,6 +1,13 @@
+<!--    foreach article :   -->
 <div id="article">
-    <?php
-    echo "ici le texte de l'article"
-        // display last four articles
-    ?>
+    <h2><?= $title ?></h2>
+    <article>
+        <div>
+            <?= $author ?>
+        </div>
+        <div>
+            <?= $art_text ?>
+        </div>
+    </article>
+    <div class="comt"><?= $user . " : " . $com_text ?></div>
 </div>
