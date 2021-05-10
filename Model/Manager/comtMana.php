@@ -22,10 +22,15 @@ class comtMana {
 
     // Read
     // all comments or one article's comments or one user's comments
+    /**
+     * @param int $art
+     * @param int $user
+     * @return array
+     */
     public function getComts($art = 0, $user = 0): array{
         $Comts = [];
         $search = false;
-        // ask witch comments ?
+        // ask all / article's / user's comments ?
         $param = 0;
         if($art < 0){
             $param ++;

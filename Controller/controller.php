@@ -14,3 +14,4 @@ class controller {
     }
 }
 
+// use manager to get data and send result to view

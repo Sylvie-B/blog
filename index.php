@@ -13,10 +13,11 @@ $mana = new artMana($db);
 // display
 $view = new controller();
 
+
 $ref = [
     'title' => 'art-1',
     'text' => 'ceci est mon texte',
     'author' => 'Heliosens'
 ];
 
-$view->displayView('articleView', 'Mon blog', [$ref]);
+$view->displayView('articleView', 'Mon blog', $ref);

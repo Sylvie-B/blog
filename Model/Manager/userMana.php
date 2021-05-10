@@ -88,6 +88,10 @@ class userMana
     }
 
     // delete user if admin
+
+    /**
+     * @param $id
+     */
     public function supprUser ($id){
         $search = $this->pdo->prepare("DELETE FROM user WHERE id = $id");
         if($search->execute()){
