@@ -15,7 +15,10 @@ class userMana
             print_r($_POST);
         }
     }
+
     // read
+
+    // update
 
     // delete user if admin
 
