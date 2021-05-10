@@ -47,35 +47,51 @@ class userMana
     }
 
     // one user
-
     /**
-     * @param $id
-     * @return string|User
+     * @param int $id
+     * @return User
      */
-    public function getUser($id) {
-        $user = "";
+    public function getUser(int $id) : User {
         $search = $this->pdo->prepare('SELECT * FROM user WHERE id = $id');
-        $state = $search->execute();
-
-        if($state){
-            $user = $search->fetch();
-            $user = new User($user['id'], $user['pseudo'], $user['password'], $user['role_fk']);
-        }
+        $search->execute();
+        $user = $search->fetch();
+        $user = new User($user['id'], $user['pseudo'], $user['password'], $user['role_fk']);
         return $user;
     }
-
     // update
+    // user pseudo
     /**
      * @param $id
      * @param $new_pseudo
+     */
+    public function updateUserPseudo($id, $new_pseudo){
+        $search = $this->pdo->prepare("UPDATE user SET $new_pseudo = :new_pseudo WHERE id = :id");
+        $search->bindValue(':id', $id);
+        $search->bindValue(':new_pseudo', $new_pseudo);
+        if($search->execute()){
+            echo "Pseudo mis à jour";
+        }
+    }
+
+    // user password
+    /**
+     * @param $id
      * @param $new_password
      */
-    public function updateUser($id, $new_pseudo, $new_password){
-        $search = $this->pdo->prepare("UPDATE user SET $new_pseudo = :new_pseudo, $new_password = :password WHERE id = :id");
+    public function updateUserPass($id, $new_password){
+        $search = $this->pdo->prepare("UPDATE user SET $new_password = :password WHERE id = :id");
+        $search->bindValue(':id', $id);
+        $search->bindValue(':new_password', $new_password);
+        if($search->execute()){
+            echo "mot de passe mis à jour";
+        }
     }
 
     // delete user if admin
-
+    public function supprUser ($id){
+        $search = $this->pdo->prepare("DELETE FROM user WHERE id = $id");
+        if($search->execute()){
+            echo "Utilisateur supprimé";
+        }
+    }
 }
-
-//exchange data with data base

@@ -29,12 +29,22 @@ class artMana {
     /**
      * @return array
      */
-    public function getBlogArticles(): array {
+    public function getBlogArticles($user): array {
         $blogArt = [];
-        $search = $this->pdo->prepare("SELECT * FROM article");
-        $state = $search->execute();
+        $param = 0;
+        $search = false;
+        if($user < 0){
+            $param ++;
+        }
+        switch ($param){
+            case 0:
+                $search = $this->pdo->prepare("SELECT * FROM article");
+                break;
+            case 1 :
+                $search = $this->pdo->prepare("SELECT * FROM article WHERE author_fk = $user");
+        }
 
-        if($state){
+        if($search->execute()){
             $line = $search->fetchAll();
             foreach ($line as $data) {
                 $blogArt[] = new Article($data['id_art'], $data['title'], $data['art_text'], $data['author_fk']);
@@ -46,9 +56,9 @@ class artMana {
     // one article
     /**
      * @param $id
-     * @return Article|string
+     * @return Article
      */
-    public function getArticle($id){
+    public function getArticle($id) : Article {
         $article ='';
         $search = $this->pdo->prepare("SELECT * FROM article WHERE id_art = $id");
         $state = $search->execute();

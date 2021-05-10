@@ -24,14 +24,17 @@ class comtMana {
     // all comments or one article's comments or one user's comments
     public function getComts($art = 0, $user = 0): array{
         $Comts = [];
-        $search = "";
-        // which param is there ?
+        $search = false;
+        // ask witch comments ?
         $param = 0;
-        if ($art) {
-            $param++;
+        if($art < 0){
+            $param ++;
         }
-        if ($user) {
-            $param = $param + 2;
+        if($user < 0){
+            $param += 2;
+        }
+        if($art < 0 && $user < 0){
+            $param += 3;
         }
         switch ($param) {
             case 0:
@@ -40,14 +43,14 @@ class comtMana {
             case 1:
                 $search = $this->pdo->prepare("SELECT * FROM comment WHERE art_fk = $art");
                 break;
-            case 3:
+            case 2:
                 $search = $this->pdo->prepare("SELECT * FROM comment WHERE user_fk = $user");
                 break;
+            case 3:
+                $search = $this->pdo->prepare("SELECT * FROM comment WHERE art_fk = $art AND user_fk = $user");
         }
 
-        $state = $search->execute();
-
-        if($state){
+        if($search->execute()){
             $line = $search->fetchAll();
             foreach ($line as $data) {
                 $Comts[] = new Comment($data['id_com'], $data['com_text'], $data['user_fk'], $data['art_fk']);
@@ -57,22 +60,22 @@ class comtMana {
     }
 
     // one comment
-    public function getOneComt($id){
-        $comment = '';
-        $search = $this->pdo->prepare("SELECT * FROM comment WHERE id_com = $id");
-        $state = $search->execute();
 
-        if($state){
-            $comment = $search->fetch();
-            $comment = new Comment($comment['id_com'], $comment['com_text'], $comment['user_fk'], $comment['art_fk']);
-        }
+    /**
+     * @param int $id
+     * @return Comment
+     */
+    public function getOneComt(int $id) : Comment {
+        $search = $this->pdo->prepare("SELECT * FROM comment WHERE id_com = $id");
+        $search->execute();
+        $comment = $search->fetch();
+        $comment = new Comment($comment['id_com'], $comment['com_text'], $comment['user_fk'], $comment['art_fk']);
         return $comment;
     }
 
     // update if user_fk or admin
     public function updateComt ($id, $new_text){
         $search = $this->pdo->prepare("UPDATE comment SET com_text = :new_text WHERE id_com = :id");
-
         $search->bindParam('id', $id);
         $search->bindParam('new_text', $new_text);
         if($search->execute()){
