@@ -69,7 +69,7 @@ class comtMana {
         return $comment;
     }
 
-    // update
+    // update if user_fk or admin
     public function updateComt ($id, $new_text){
         $search = $this->pdo->prepare("UPDATE comment SET com_text = :new_text WHERE id_com = :id");
 
@@ -80,7 +80,7 @@ class comtMana {
         }
     }
 
-    // deleteComt
+    // deleteComt if user_fk or admin
     public function supprComt ($id){
         $search = $this->pdo->prepare("DELETE FROM comment WHERE id_com = $id");
         if($search->execute()){

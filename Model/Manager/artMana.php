@@ -8,9 +8,10 @@ class artMana {
         $this->pdo = $pdo;
     }
 
-    // Create
-    public function addArticle (string $art_text, int $author_fk): bool {
-        $search = $this->pdo->prepare("INSERT INTO article (art_text, author_fk) VALUE (:art_text, :author_fk)");
+    // Create if admin
+    public function addArticle (string $title, string $art_text, int $author_fk): bool {
+        $search = $this->pdo->prepare("INSERT INTO article (title, art_text, author_fk) VALUE (:title, :art_text, :author_fk)");
+        $search->bindValue(':title', strip_tags($title));
         $search->bindValue(':art_text', strip_tags($art_text));
         $search->bindValue(':author_fk', $author_fk,PDO::PARAM_INT);
         $search->execute();
@@ -27,7 +28,7 @@ class artMana {
         if($state){
             $line = $search->fetchAll();
             foreach ($line as $data) {
-                $blogArt[] = new Article($data['id_art'], $data['art_text'], $data['author_fk']);
+                $blogArt[] = new Article($data['id_art'], $data['title'], $data['art_text'], $data['author_fk']);
             }
         }
         return $blogArt;
@@ -41,12 +42,12 @@ class artMana {
 
         if($state){
             $article = $search->fetch();
-            $article = new Article($article['id_art'], $article['art_text'], $article['author_fk']);
+            $article = new Article($article['id_art'], $article['title'], $article['art_text'], $article['author_fk']);
         }
         return $article;
     }
 
-    // UpdateArt
+    // UpdateArt if admin
     public function updateArt($id, $new_text){
         $search = $this->pdo->prepare("UPDATE article SET art_text = :new_text WHERE id_art = :id");
 
@@ -57,7 +58,7 @@ class artMana {
         }
     }
 
-    // DeleteArt
+    // DeleteArt if admin
     public function supprArt ($id){
         $search = $this->pdo->prepare("DELETE FROM article WHERE id_art = $id");
         if($search->execute()) {

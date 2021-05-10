@@ -8,18 +8,16 @@ class userMana
     public function __construct($pdo) {
         $this->pdo = $pdo;
     }
-
-    // read database
-
+    //create if admin
     // check user form and add to database
     function userForm () {
         if(!empty($_POST)){
             print_r($_POST);
+        }
     }
+    // read
 
-}
-
-    // admin delete user
+    // delete user if admin
 
 }
 
