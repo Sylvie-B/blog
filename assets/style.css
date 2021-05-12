@@ -8,6 +8,11 @@ body {
     width: 100%;
 }
 
+section {
+    width: 80%;
+    margin: auto;
+}
+
 header {
     text-align: center;
 }
@@ -35,6 +40,7 @@ header {
 
 header, footer {
     min-height: 5vh;
+    margin: auto;
     border: 1px black dashed;
 }
 
@@ -45,3 +51,4 @@ h2 {
 #article {
     min-height: 80vh;
 }
+

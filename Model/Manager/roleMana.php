@@ -21,7 +21,6 @@ class roleMana {
     }
 
     // read
-
     /**
      * @return array
      */
@@ -50,7 +49,6 @@ class roleMana {
     }
 
     // updateRole
-
     /**
      * @param $id
      * @param $new_role
@@ -65,7 +63,6 @@ class roleMana {
     }
 
     // delete role
-
     /**
      * @param $id
      */

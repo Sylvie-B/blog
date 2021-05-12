@@ -2,6 +2,7 @@
 // include element
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Model/BDb.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Model/Entity/Article.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Model/Entity/Comment.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Model/Manager/artMana.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Controller/controller.php';
 
@@ -14,10 +15,8 @@ $mana = new artMana($db);
 $view = new controller();
 
 
-$ref = [
-    'title' => 'art-1',
-    'text' => 'ceci est mon texte',
-    'author' => 'Heliosens'
-];
+$view->displayView('articleView', 'article');
 
-$view->displayView('articleView', 'Mon blog', $ref);
+// display footer
+require_once $_SERVER['DOCUMENT_ROOT'] . '/View/partials/footer.php';
+var_dump($_POST);
