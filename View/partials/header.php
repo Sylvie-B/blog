@@ -12,5 +12,7 @@
     <section>
         <header>
             <h1>Mon blog</h1>
+            <button type="submit">Connect</button>
+            <button type="submit">Disconnect</button>
         </header>
         <!--    articleForm / articleView   -->

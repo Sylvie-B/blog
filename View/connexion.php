@@ -1,3 +1,4 @@
+<!--    header    -->
 <div id="modal">
     <div id="frame">
         <div>
@@ -22,3 +23,4 @@
         </div>
     </div>
 </div>
+<!--    footer    -->

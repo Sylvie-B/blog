@@ -1,6 +1,7 @@
+<!--    header    -->
 <h1>Ajouter un article</h1>
 
-<form action="#" method="post">
+<form method="post">
     <div>
         <label for="title">Titre</label><br>
         <input type="text" id="title" name="title">
@@ -13,3 +14,4 @@
         <button type="submit">valider</button>
     </div>
 </form>
+<!--    footer    -->
