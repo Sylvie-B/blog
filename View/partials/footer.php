@@ -1,5 +1,7 @@
             <footer>
-                <div id="newTitle"></div>
+                <div id="olderTitle">
+                    <?= $ref[0] . " " . $ref[1] . " " . $ref[2] ?>
+                </div>
             </footer>
         </section>
     <script src="assets/app.js"></script>

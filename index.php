@@ -14,9 +14,6 @@ $mana = new artMana($db);
 // display
 $view = new controller();
 
+$view->displayView('connexion', 'Sign In', ["a", "b", "c"]);
 
-$view->displayView('articleView', 'article');
-
-// display footer
-require_once $_SERVER['DOCUMENT_ROOT'] . '/View/partials/footer.php';
 var_dump($_POST);

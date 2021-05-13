@@ -1,6 +1,5 @@
-<!--    $_POST = form data    -->
     <div id="article">
-        <h2>titre de l'article</h2>
+        <h3>titre de l'article</h3>
         <article>
             <div>
                 texte...
@@ -9,3 +8,4 @@
                 Par "nom de l'Auteur"
             </div>
         </article>
+    </div>
