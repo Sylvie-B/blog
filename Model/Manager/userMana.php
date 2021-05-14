@@ -9,6 +9,19 @@ class userMana
         $this->pdo = $pdo;
     }
 
+    // check form, send new user to data base and todo connect user
+   public function checkAndConnectUser () {
+        if(isset($_POST['pseudo'], $_POST['passWord'])){
+            // get data
+            // encode password
+            $pw = password_hash($_POST['passWord'], PASSWORD_ARGON2ID);
+            $this->addUser($_POST['pseudo'], $pw);
+        }
+        else{
+            echo "formulaire incomplet";
+        }
+   }
+
     //create if admin
     // check user form and add to database
     /**
@@ -17,7 +30,7 @@ class userMana
      * @param int $role_fk
      * @return string
      */
-    public function addUser(string $pseudo, string $password, int $role_fk){
+    public function addUser(string $pseudo, string $password, int $role_fk = 2){
         $search = $this->pdo->prepare("INSERT INTO user (pseudo, password, role_fk)
         VALUE (:pseudo, :password, :role_fk)
         ");
