@@ -9,9 +9,22 @@ class userMana
         $this->pdo = $pdo;
     }
 
+    // is user exist ?
+    public function logIn () {
+        $search = $this->pdo->prepare("SELECT * FROM user WHERE pseudo = :pseudo");
+        $search->bindValue(":pseudo", $_POST['pseudo']);
+        if($search->execute()){
+            
+        }
+        else{
+            echo "Utilisateur introuvable";
+        }
+    }
+
     // check form, send new user to data base and todo connect user
    public function checkAndConnectUser () {
         if(isset($_POST['pseudo'], $_POST['passWord'])){
+
             // get data
             // encode password
             $pw = password_hash($_POST['passWord'], PASSWORD_ARGON2ID);

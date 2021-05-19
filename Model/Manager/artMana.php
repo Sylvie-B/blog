@@ -29,15 +29,16 @@ class artMana {
 
     // Read
     // ask all / user's articles ?
+
     /**
-     * @param int $user
+     * @param null $user
      * @return array
      */
-    public function getBlogArticles($user = 0): array {
+    public function getBlogArticles($user = null): array {
         $blogArt = [];
         $param = 0;
         $search = false;
-        if($user < 0){
+        if($user){
             $param ++;
         }
         switch ($param){
