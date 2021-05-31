@@ -9,6 +9,7 @@ class artMana {
     }
 
     /**
+     * add article in database
      * @param string $title
      * @param string $art_text
      * @param int $author_fk
