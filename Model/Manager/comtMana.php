@@ -11,7 +11,7 @@ class comtMana {
     // Create
     public function addComt (string $com_text, int $user_fk, int $art_fk): bool {
         $search = $this->pdo->prepare("
-            INSERT INTO comment (com_text, user_fk, art_fk) VALUE (:com_text, :user_fk, :art_fk)
+            INSERT INTO comment (com_text, user_fk, art_fk) VALUES (:com_text, :user_fk, :art_fk)
         ");
         $search->bindValue(':com_txt', $com_text);
         $search->bindValue('user_fk', $user_fk);

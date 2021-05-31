@@ -45,7 +45,7 @@ class userMana
      */
     public function addUser(string $pseudo, string $password, int $role_fk = 2){
         $search = $this->pdo->prepare("INSERT INTO user (pseudo, password, role_fk)
-        VALUE (:pseudo, :password, :role_fk)
+        VALUES (:pseudo, :password, :role_fk)
         ");
         $search->bindValue(':pseudo', strip_tags($pseudo));
         $search->bindValue(':password', $password);
