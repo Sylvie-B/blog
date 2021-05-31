@@ -13,9 +13,9 @@ class artMana {
      * @param string $title
      * @param string $art_text
      * @param int $author_fk
-     * @return string
+     * @return bool
      */
-    public function addArticle (string $title, string $art_text, int $author_fk) {
+    public function addArticle (string $title, string $art_text, int $author_fk) : bool {
         $search = $this->pdo->prepare("
             INSERT INTO article (title, art_text, author_fk)
             VALUE (:title, :art_text, :author_fk)");
@@ -27,12 +27,12 @@ class artMana {
     }
 
     /**
-     * get all user's articles
+     * get all articles
      * @param null $user
      * @return array
      */
     public function getBlogArticles($user = null): array {
-        $blogArt = [];
+        $blogArticles = [];
         $param = 0;
         $search = false;
         if($user){
@@ -49,10 +49,10 @@ class artMana {
         if($search->execute()){
             $line = $search->fetchAll();
             foreach ($line as $data) {
-                $blogArt[] = new Article($data['id_art'], $data['title'], $data['art_text'], $data['author_fk']);
+                $blogArticles[] = new Article($data['id_art'], $data['title'], $data['art_text'], $data['author_fk']);
             }
         }
-        return $blogArt;
+        return $blogArticles;
     }
 
     /**
@@ -67,7 +67,6 @@ class artMana {
         $article = new Article($article['id_art'], $article['title'], $article['art_text'], $article['author_fk']);
         return $article;
     }
-
     /**
      * Update article
      * @param $id
