@@ -18,7 +18,7 @@ class artMana {
     public function addArticle (string $title, string $art_text, int $author_fk) : bool {
         $search = $this->pdo->prepare("
             INSERT INTO article (title, art_text, author_fk)
-            VALUE (:title, :art_text, :author_fk)");
+            VALUES (:title, :art_text, :author_fk)");
         $search->bindValue(':title', strip_tags($title));
         $search->bindValue(':art_text', strip_tags($art_text));
         $search->bindValue(':author_fk', $author_fk,PDO::PARAM_INT);
