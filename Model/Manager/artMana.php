@@ -8,8 +8,6 @@ class artMana {
         $this->pdo = $pdo;
     }
 
-    // Create if admin
-
     /**
      * @param string $title
      * @param string $art_text
@@ -24,13 +22,11 @@ class artMana {
         $search->bindValue(':art_text', strip_tags($art_text));
         $search->bindValue(':author_fk', $author_fk,PDO::PARAM_INT);
         $search->execute();
-        return $this->pdo->lastInsertId();
+        return $this->pdo->lastInsertId() !== 0;
     }
 
-    // Read
-    // ask all / user's articles ?
-
     /**
+     * ask all user's articles ?
      * @param null $user
      * @return array
      */
@@ -71,8 +67,8 @@ class artMana {
         return $article;
     }
 
-    // UpdateArt if admin
     /**
+     * Update article
      * @param $id
      * @param $new_text
      */
@@ -86,8 +82,8 @@ class artMana {
         }
     }
 
-    // DeleteArt if admin
     /**
+     * Delete article
      * @param $id
      */
     public function supprArt ($id){

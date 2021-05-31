@@ -16,11 +16,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/Controller/controller.php';
 $db = new BDb();
 $db = $db->connect();
 
-$ctrl = new controller($db);
-
-
-
-
 
 
 //echo '<pre>';
