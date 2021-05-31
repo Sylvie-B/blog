@@ -27,7 +27,7 @@ class artMana {
     }
 
     /**
-     * ask all user's articles ?
+     * get all user's articles
      * @param null $user
      * @return array
      */
@@ -55,8 +55,8 @@ class artMana {
         return $blogArt;
     }
 
-    // one article
     /**
+     * get one article
      * @param $id
      * @return Article
      */
